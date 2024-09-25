@@ -28,9 +28,9 @@ def gamedef():
 
     CLOUD = pygame.image.load(os.path.join("Assets/Other", "Cloud.png"))
 
-    BG = pygame.image.load(os.path.join("Assets/Other", "Track.png"))
+    BG = pygame.image.load(os.path.join("Assets/Other", "grasstrack.jpg"))
 
-
+    scoreSFX = pygame.mixer.Sound('caching.mp3')
     class Dinosaur:
         X_POS = 80
         Y_POS = 310
@@ -155,7 +155,7 @@ def gamedef():
         def __init__(self, image):
             self.type = 0
             super().__init__(image, self.type)
-            self.rect.y = 250
+            self.rect.y = 200
             self.index = 0
 
         def draw(self, SCREEN):
@@ -173,6 +173,7 @@ def gamedef():
                     feedback_label.config(text="Correct!", fg="green")
                     root.after(500, root.destroy)  # Correct answer, close the Tkinter window after 500ms
                     global quiz_result
+                    pygame.mixer.Sound.play(scoreSFX)
                     quiz_result = True
                 else:
                     feedback_label.config(text="Wrong :(", fg="red")
@@ -261,7 +262,7 @@ def gamedef():
                 if event.type == pygame.QUIT:
                     run = False
 
-            SCREEN.fill((255, 255, 255))
+            SCREEN.fill((255, 255, 230))
             userInput = pygame.key.get_pressed()
 
             player.draw(SCREEN)
